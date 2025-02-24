@@ -33,11 +33,11 @@ function SelectInput({ items, placeholder, i, onChange }) {
         }
       }}
     >
-      <option value="0" style={{ color: "#c9c9c9" }}>
+      <option value={0} style={{ color: "#c9c9c9" }}>
         {placeholder}
       </option>
       {items.map((label) => (
-        <option value="1">{label}</option>
+        <option value={1}>{label}</option>
       ))}
     </Form.Select>
   );
@@ -53,10 +53,21 @@ function CheckInput({ items, i, onChange }) {
 }
 
 // Component for submit button
-function SubmitBtn({ message, enable }) {
+function SubmitBtn({ message, enable, setSubmit }) {
   return (
     <div className="d-grid gap-2">
-      <Button variant="primary" type="submit" disabled={!enable}>
+      <Button
+        variant="primary"
+        type="button"
+        disabled={!enable}
+        onClick={() => {
+          setSubmit();
+          setTimeout(
+            () => document.getElementById("surveyForm").submit(),
+            5000
+          );
+        }}
+      >
         {message}
       </Button>
     </div>
@@ -64,9 +75,9 @@ function SubmitBtn({ message, enable }) {
 }
 
 // Component that holds all the input fields
-export default function Survey({ fieldChange, enableSubmit }) {
+export default function Survey({ fieldChange, enableSubmit, setSubmit }) {
   return (
-    <Form style={{ paddingTop: 20 }}>
+    <Form style={{ paddingTop: 20 }} id="surveyForm">
       <Form.Group className="mb-3" controlId="nameInput">
         <TextInput placeholder="Enter name*" i={0} onChange={fieldChange} />
       </Form.Group>
@@ -98,7 +109,11 @@ export default function Survey({ fieldChange, enableSubmit }) {
           onChange={fieldChange}
         />
       </Form.Group>
-      <SubmitBtn message="Submit survey" enable={enableSubmit} />
+      <SubmitBtn
+        message="Submit survey"
+        enable={enableSubmit}
+        setSubmit={setSubmit}
+      />
     </Form>
   );
 }
