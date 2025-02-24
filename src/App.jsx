@@ -1,15 +1,20 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import "./App.css";
-import {
-  Navbar,
-  Container,
-  Stack,
-  ProgressBar
-} from "react-bootstrap";
+import { Navbar, Container, Stack, ProgressBar } from "react-bootstrap";
 import Survey from "./components/Components.js";
 
 export default function App() {
+  const numInputs = 4;
+  const [filled, setFilled] = useState(Array(numInputs).fill(0)); // array of filled fields
+  const progress = filled.reduce((sum, a) => sum + a, 0) / numInputs;
+
+  // Record a field change; sets 1 to the filled field, or sets 0 if a field was emptied.
+  function fieldChange(i, value) {
+    const nextFilled = filled.slice();
+    nextFilled[i] = value;
+    setFilled(nextFilled);
+  }
 
   return (
     <>
@@ -36,8 +41,8 @@ export default function App() {
         <div className="h3" style={{ textAlign: "left" }}>
           Complete the survey
         </div>
-        <ProgressBar now={49}></ProgressBar>
-        <Survey />
+        <ProgressBar now={progress * 100}></ProgressBar>
+        <Survey fieldChange={fieldChange} enableSubmit={progress === 1} />
       </Stack>
     </>
   );
