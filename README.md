@@ -1,8 +1,7 @@
-# React + Vite
+# Real time validation survey
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This application is a simple survey form that validates the filled data in real time before submition. It uses React-Bootstrap to make a responsive UI design.
 
-Currently, two official plugins are available:
+Live preview at CodeSandbox:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+https://f23xz9.csb.app/?group=on
